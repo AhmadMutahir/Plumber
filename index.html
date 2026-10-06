@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaFlow Plumbing • 24/7 Emergency Service</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --primary: 234 179 8;
+        }
+        
+        .tail-container {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .logo-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .hero-bg {
+            background: linear-gradient(90deg, rgba(234,179,8,0.85) 0%, rgba(234,179,8,0.75) 100%), 
+                        url('https://picsum.photos/id/1015/2000/1200') center/cover no-repeat;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: rgb(234 179 8);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+        }
+
+        .pipe-bg {
+            background: linear-gradient(45deg, #111827 0%, #1f2937 100%);
+        }
+
+        .stat-number {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .wave {
+            animation: wave 3s linear infinite;
+        }
+
+        @keyframes wave {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .emergency-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        .dropdown {
+            animation: dropdownAnim 0.3s ease forwards;
+        }
+
+        @keyframes dropdownAnim {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="tail-container text-slate-800 overflow-x-hidden">
+    <!-- NAVBAR -->
+    <nav class="bg-white border-b border-slate-200 shadow-sm fixed w-full z-50">
+        <div class="max-w-screen-2xl mx-auto">
+            <div class="px-8 py-5 flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center gap-x-3">
+                    <div class="w-11 h-11 bg-yellow-400 rounded-2xl flex items-center justify-center shadow-inner relative">
+                        <i class="fa-solid fa-wrench text-slate-900 text-3xl rotate-12"></i>
+                        <div class="absolute -top-1 -right-1 w-5 h-5 bg-emerald-400 rounded-xl flex items-center justify-center">
+                            <i class="fa-solid fa-droplet text-white text-xs"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="logo-font text-3xl font-semibold tracking-tighter text-slate-900">AQUAFLOW</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-x-9 text-sm font-medium">
+                    <a href="#" onclick="smoothScrollTo('services')" class="nav-link text-slate-600 hover:text-slate-900">Services</a>
+                    <a href="#" onclick="smoothScrollTo('about')" class="nav-link text-slate-600 hover:text-slate-900">About Us</a>
+                    <a href="#" onclick="smoothScrollTo('projects')" class="nav-link text-slate-600 hover:text-slate-900">Projects</a>
+                    <a href="#" onclick="smoothScrollTo('testimonials')" class="nav-link text-slate-600 hover:text-slate-900">Reviews</a>
+                    <a href="#" onclick="smoothScrollTo('blog')" class="nav-link text-slate-600 hover:text-slate-900">Blog</a>
+                </div>
+
+                <div class="flex items-center gap-x-4">
+                    <div onclick="showContactModal()" 
+                         class="hidden sm:flex items-center gap-x-2 px-5 py-2.5 bg-white border border-slate-300 hover:border-yellow-400 rounded-3xl text-sm font-semibold cursor-pointer transition-all active:scale-95">
+                        <i class="fa-solid fa-phone text-yellow-500"></i>
+                        <span>(555) 123-4567</span>
+                    </div>
+                    
+                    <button onclick="showContactModal()" 
+                            class="px-6 py-3 bg-slate-900 hover:bg-yellow-500 hover:text-slate-900 transition-all text-white text-sm font-semibold rounded-3xl flex items-center gap-x-2 shadow-lg shadow-yellow-500/30">
+                        <i class="fa-solid fa-bolt text-yellow-400"></i>
+                        <span class="hidden sm:inline">GET A QUOTE</span>
+                        <span class="sm:hidden">QUOTE</span>
+                    </button>
+                    
+                    <!-- Mobile menu toggle -->
+                    <button onclick="toggleMobileMenu()" 
+                            class="md:hidden w-11 h-11 flex items-center justify-center text-2xl text-slate-700">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- MOBILE MENU -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t py-6 px-8">
+            <div class="flex flex-col gap-y-6 text-lg font-medium">
+                <a href="#" onclick="toggleMobileMenu();smoothScrollTo('services')" class="py-2 border-b">Services</a>
+                <a href="#" onclick="toggleMobileMenu();smoothScrollTo('about')" class="py-2 border-b">About Us</a>
+                <a href="#" onclick="toggleMobileMenu();smoothScrollTo('projects')" class="py-2 border-b">Recent Projects</a>
+                <a href="#" onclick="toggleMobileMenu();smoothScrollTo('testimonials')" class="py-2 border-b">Customer Reviews</a>
+                <a href="#" onclick="toggleMobileMenu();smoothScrollTo('blog')" class="py-2 border-b">Plumbing Tips</a>
+                
+                <div class="pt-6">
+                    <button onclick="toggleMobileMenu();showContactModal()" 
+                            class="w-full py-6 bg-yellow-400 text-slate-900 font-bold text-xl rounded-3xl flex items-center justify-center gap-x-3 active:scale-95 transition-all">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>CALL NOW: (555) 123-4567</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero-bg h-screen flex items-center pt-16">
+        <div class="max-w-screen-2xl mx-auto px-6 md:px-12 lg:px-20 grid md:grid-cols-12 gap-12 items-center h-full">
+            <div class="md:col-span-7 text-white">
+                <div class="inline-flex items-center gap-x-2 bg-white/20 backdrop-blur-md px-5 py-2 rounded-3xl text-sm mb-6 shadow-inner">
+                    <div class="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
+                    <span class="font-semibold tracking-widest">24/7 EMERGENCY SERVICE</span>
+                </div>
+                
+                <h1 class="text-6xl md:text-7xl font-semibold leading-none tracking-tighter logo-font mb-4">
+                    EXPERT PLUMBING<br>YOU CAN TRUST
+                </h1>
+                
+                <p class="max-w-lg text-xl text-white/90 mb-10">
+                    Fast, reliable plumbing services for homes and businesses. 
+                    No job too big or too small. Licensed • Insured • Local.
+                </p>
+                
+                <div class="flex items-center gap-x-4">
+                    <button onclick="showContactModal()" 
+                            class="px-10 py-6 bg-yellow-400 hover:bg-white hover:text-slate-900 transition-all rounded-3xl text-slate-900 font-semibold text-xl flex items-center gap-x-4 shadow-2xl shadow-yellow-500/40">
+                        <i class="fa-solid fa-wrench"></i>
+                        <span>BOOK SERVICE NOW</span>
+                    </button>
+                    
+                    <button onclick="smoothScrollTo('services')" 
+                            class="px-8 py-6 border-2 border-white/70 hover:border-white text-white font-medium rounded-3xl flex items-center gap-x-3 transition-all">
+                        SEE OUR SERVICES
+                    </button>
+                </div>
+                
+                <div class="flex items-center gap-x-8 mt-16">
+                    <div class="flex -space-x-4">
+                        <div class="w-8 h-8 bg-white rounded-2xl border-2 border-yellow-400 flex items-center justify-center text-xs font-bold text-slate-800">A</div>
+                        <div class="w-8 h-8 bg-white rounded-2xl border-2 border-yellow-400 flex items-center justify-center text-xs font-bold text-slate-800">J</div>
+                        <div class="w-8 h-8 bg-white rounded-2xl border-2 border-yellow-400 flex items-center justify-center text-xs font-bold text-slate-800">M</div>
+                    </div>
+                    <div>
+                        <div class="text-xs text-white/70 tracking-widest">TRUSTED BY</div>
+                        <div class="text-white text-sm font-medium">1,482 homeowners this month</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- RIGHT SIDE HERO CARD -->
+            <div class="md:col-span-5 hidden lg:flex justify-end">
+                <div class="bg-white text-slate-900 rounded-3xl shadow-2xl max-w-xs overflow-hidden">
+                    <!-- Mini emergency banner -->
+                    <div class="bg-red-500 text-white text-center py-3 text-sm font-semibold flex items-center justify-center gap-x-2">
+                        <i class="fa-solid fa-bell emergency-pulse"></i>
+                        <span>EMERGENCY? WE'RE ON OUR WAY</span>
+                    </div>
+                    
+                    <div class="p-8">
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <div class="text-emerald-500 text-xs font-bold tracking-[1px]">ARRIVAL IN</div>
+                                <div id="arrival-time" class="text-5xl font-semibold text-slate-800 tabular-nums">29</div>
+                                <div class="text-xs text-slate-500 -mt-1">minutes</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="flex items-center gap-x-1 text-amber-400">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <div class="text-xs text-slate-400 mt-3">4.98 average rating</div>
+                            </div>
+                        </div>
+                        
+                        <div class="h-px bg-slate-100 my-7"></div>
+                        
+                        <div class="space-y-6">
+                            <div class="flex gap-x-5">
+                                <div class="w-6 h-6 bg-yellow-100 text-yellow-500 rounded-2xl flex items-center justify-center text-xs">🚰</div>
+                                <div class="flex-1">
+                                    <div class="font-semibold">Leaking Pipe</div>
+                                    <div class="text-xs text-slate-500">Repaired in 45 minutes • $189</div>
+                                </div>
+                                <div class="text-emerald-500 text-xs font-medium self-center">JUST NOW</div>
+                            </div>
+                            
+                            <div class="flex gap-x-5">
+                                <div class="w-6 h-6 bg-blue-100 text-blue-500 rounded-2xl flex items-center justify-center text-xs">🪠</div>
+                                <div class="flex-1">
+                                    <div class="font-semibold">Clogged Drain</div>
+                                    <div class="text-xs text-slate-500">Cleared in 20 minutes • $129</div>
+                                </div>
+                                <div class="text-emerald-500 text-xs font-medium self-center">12m AGO</div>
+                            </div>
+                        </div>
+                        
+                        <button onclick="fakeBookNow()" 
+                                class="mt-10 w-full py-4 bg-slate-900 text-white rounded-3xl text-sm font-semibold flex items-center justify-center gap-x-2 hover:bg-yellow-400 hover:text-slate-900 transition-colors">
+                            <i class="fa-solid fa-arrow-right"></i>
+                            <span>REQUEST SAME-DAY SERVICE</span>
+                        </button>
+                    </div>
+                    
+                    <div class="bg-slate-50 px-8 py-5 text-xs flex items-center justify-between text-slate-500">
+                        <div class="flex items-center gap-x-3">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>INSURED</span>
+                        </div>
+                        <div class="h-3 w-px bg-slate-200"></div>
+                        <div>LICENSED • BONDED</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- TRUST BAR -->
+        <div class="absolute bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t py-5 hidden xl:flex items-center justify-center gap-x-16 text-xs">
+            <div class="flex items-center gap-x-8">
+                <div class="flex items-center gap-x-2">
+                    <i class="fa-solid fa-medal text-amber-400"></i>
+                    <div>
+                        <span class="block text-[10px] text-slate-400">BEST OF</span>
+                        <span class="font-semibold text-slate-700">2024</span>
+                    </div>
+                </div>
+                <div class="h-8 w-px bg-slate-200"></div>
+                <div class="text-slate-400 text-xs">✓ 10,000+ Happy Customers</div>
+                <div class="text-slate-400 text-xs">✓ 15 Years Experience</div>
+                <div class="text-slate-400 text-xs">✓ Same Day Service</div>
+            </div>
+        </div>
+        
+        <!-- SCROLL INDICATOR -->
+        <div onclick="smoothScrollTo('services')" 
+             class="hidden xl:flex absolute bottom-8 left-1/2 flex-col items-center cursor-pointer">
+            <div class="text-[10px] tracking-[2px] font-medium text-white/70 mb-3">SCROLL FOR SERVICES</div>
+            <i class="fa-solid fa-chevron-down text-white text-xl animate-bounce"></i>
+        </div>
+    </header>
+
+    <!-- STATS BAR -->
+    <div class="bg-slate-900 py-6">
+        <div class="max-w-screen-2xl mx-auto px-8 grid grid-cols-3 md:grid-cols-6 gap-6 text-white text-center">
+            <div>
+                <div id="stat-1" class="stat-number text-4xl font-semibold text-yellow-400">1842</div>
+                <div class="text-xs text-slate-400 tracking-widest mt-1">JOBS COMPLETED</div>
+            </div>
+            <div>
+                <div id="stat-2" class="stat-number text-4xl font-semibold text-yellow-400">98</div>
+                <div class="text-xs text-slate-400 tracking-widest mt-1">% ON TIME</div>
+            </div>
+            <div>
+                <div id="stat-3" class="stat-number text-4xl font-semibold text-yellow-400">15</div>
+                <div class="text-xs text-slate-400 tracking-widest mt-1">YEARS EXP</div>
+            </div>
+            <div class="hidden md:block">
+                <div id="stat-4" class="stat-number text-4xl font-semibold text-yellow-400">42</div>
+                <div class="text-xs text-slate-400 tracking-widest mt-1">CITIES SERVED</div>
+            </div>
+            <div class="col-span-3 md:col-span-1 border-l border-slate-700 pl-8 text-left">
+                <div class="flex items-center gap-x-3">
+                    <div class="text-emerald-400">
+                        <i class="fa-solid fa-circle-check text-3xl"></i>
+                    </div>
+                    <div class="text-xs leading-tight">
+                        <span class="font-semibold text-white">A+ RATING</span><br>
+                        <span class="text-slate-400">Better Business Bureau</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SERVICES -->
+    <section id="services" class="py-24 bg-white">
+        <div class="max-w-screen-2xl mx-auto px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <span class="px-4 py-2 bg-yellow-100 text-yellow-500 text-xs font-bold rounded-3xl">OUR EXPERTISE</span>
+                    <h2 class="text-5xl font-semibold tracking-tight mt-3">Professional Plumbing Services</h2>
+                </div>
+                <a onclick="smoothScrollTo('contact-section')" 
+                   class="hidden md:flex items-center text-sm font-medium group">
+                    ALL SERVICES 
+                    <span class="block w-8 h-px bg-slate-300 ml-4 group-hover:bg-yellow-400 transition-colors"></span>
+                </a>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Service 1 -->
+                <div onclick="selectService(0)" class="service-card bg-white border border-slate-100 rounded-3xl overflow-hidden cursor-pointer group">
+                    <div class="h-52 bg-[url('https://picsum.photos/id/201/600/400')] bg-cover relative">
+                        <div class="absolute top-4 right-4 bg-white text-slate-700 text-[10px] font-bold px-3 py-1 rounded-3xl shadow">FAST</div>
+                        <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 text-white text-xl font-semibold">Emergency Repair</div>
+                    </div>
+                    <div class="p-7">
+                        <div class="flex justify-between items-baseline">
+                            <div class="text-xs uppercase font-semibold text-red-400">24 HOUR RESPONSE</div>
+                            <div class="text-3xl font-semibold text-slate-300 group-hover:text-yellow-400 transition-colors">$89</div>
+                        </div>
+                        <p class="text-slate-500 text-sm mt-3 line-clamp-3">
+                            Burst pipes, overflowing toilets, or no hot water? Our team responds quickly.
+                        </p>
+                        <div class="flex items-center justify-between text-xs mt-8">
+                            <div class="flex items-center gap-x-2">
+                                <i class="fa-solid fa-clock text-emerald-400"></i>
+                                <span class="text-slate-400">30-90 min</span>
+                            </div>
+                            <button onclick="event.stopImmediatePropagation();bookService(0)" 
+                                    class="text-yellow-500 text-xs font-medium flex items-center gap-x-1">
+                                BOOK <span class="text-lg leading-none">→</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div onclick="selectService(1)" class="service-card bg-white border border-slate-100 rounded-3xl overflow-hidden cursor-pointer group">
+                    <div class="h-52 bg-[url('https://picsum.photos/id/160/600/400')] bg-cover relative">
+                        <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 text-white text-xl font-semibold">Drain Cleaning</div>
+                    </div>
+                    <div class="p-7">
+                        <div class="flex justify-between items-baseline">
+                            <div class="text-xs uppercase font-semibold text-blue-400">HYDRO JETTING</div>
+                            <div class="text-3xl font-semibold text-slate-300 group-hover:text-yellow-400 transition-colors">$139</div>
+                        </div>
+                        <p class="text-slate-500 text-sm mt-3 line-clamp-3">
+                            Powerful drain clearing using state-of-the-art hydro jet technology. No mess guaranteed.
+                        </p>
+                        <div class="flex items-center justify-between text-xs mt-8">
+                            <div class="flex items-center gap-x-2">
+                                <i class="fa-solid fa-clock text-emerald-400"></i>
+                                <span class="text-slate-400">1-2 hours</span>
+                            </div>
+                            <button onclick="event.stopImmediatePropagation();bookService(1)" 
+                                    class="text-yellow-500 text-xs font-medium flex items-center gap-x-1">
+                                BOOK <span class="text-lg leading-none">→</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div onclick="selectService(2)" class="service-card bg-white border border-slate-100 rounded-3xl overflow-hidden cursor-pointer group">
+                    <div class="h-52 bg-[url('https://picsum.photos/id/29/600/400')] bg-cover relative">
+                        <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 text-white text-xl font-semibold">Water Heater</div>
+                    </div>
+                    <div class="p-7">
+                        <div class="flex justify-between items-baseline">
+                            <div class="text-xs uppercase font-semibold text-orange-400">INSTALL + REPAIR</div>
+                            <div class="text-3xl font-semibold text-slate-300 group-hover:text-yellow-400 transition-colors">$399</div>
+                        </div>
+                        <p class="text-slate-500 text-sm mt-3 line-clamp-3">
+                            Tankless or traditional. Expert installation, repair and maintenance of all brands.
+                        </p>
+                        <div class="flex items-center justify-between text-xs mt-8">
+                            <div class="flex items-center gap-x-2">
+                                <i class="fa-solid fa-clock text-emerald-400"></i>
+                                <span class="text-slate-400">Same day</span>
+                            </div>
+                            <button onclick="event.stopImmediatePropagation();bookService(2)" 
+                                    class="text-yellow-500 text-xs font-medium flex items-center gap-x-1">
+                                BOOK <span class="text-lg leading-none">→</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 4 -->
+                <div onclick="selectService(3)" class="service-card bg-white border border-slate-100 rounded-3xl overflow-hidden cursor-pointer group">
+                    <div class="h-52 bg-[url('https://picsum.photos/id/251/600/400')] bg-cover relative">
+                        <div class="absolute top-4 left-4 bg-white/90 text-slate-700 text-[10px] px-4 py-1 rounded-3xl font-medium shadow">NEW</div>
+                        <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 text-white text-xl font-semibold">Bathroom Remodel</div>
+                    </div>
+                    <div class="p-7">
+                        <div class="flex justify-between items-baseline">
+                            <div class="text-xs uppercase font-semibold text-purple-400">FULL SERVICE</div>
+                            <div class="text-3xl font-semibold text-slate-300 group-hover:text-yellow-400 transition-colors">$2k+</div>
+                        </div>
+                        <p class="text-slate-500 text-sm mt-3 line-clamp-3">
+                            Complete bathroom renovations. Fixtures, tiling, showers and more. Design to finish.
+                        </p>
+                        <div class="flex items-center justify-between text-xs mt-8">
+                            <div class="flex items-center gap-x-2">
+                                <i class="fa-solid fa-clock text-emerald-400"></i>
+                                <span class="text-slate-400">3-7 days</span>
+                            </div>
+                            <button onclick="event.stopImmediatePropagation();bookService(3)" 
+                                    class="text-yellow-500 text-xs font-medium flex items-center gap-x-1">
+                                BOOK <span class="text-lg leading-none">→</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <button onclick="showAllServicesModal()" 
+                        class="inline-flex items-center gap-x-3 border border-dashed border-slate-300 hover:border-yellow-300 px-8 py-6 rounded-3xl text-slate-500 hover:text-yellow-500 transition-all">
+                    <span class="font-medium">VIEW ALL 18 SERVICES</span>
+                    <i class="fa-solid fa-arrow-down text-lg"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY US -->
+    <section class="pipe-bg py-20 text-white">
+        <div class="max-w-screen-2xl mx-auto px-8">
+            <div class="grid md:grid-cols-12 gap-20 items-center">
+                <div class="md:col-span-5">
+                    <div class="sticky top-28">
+                        <span class="inline px-5 py-2 rounded-3xl bg-yellow-400 text-slate-900 text-xs font-bold">WHY CHOOSE US</span>
+                        <h2 class="text-5xl font-semibold tracking-tighter leading-none mt-5">The AquaFlow difference</h2>
+                        <p class="mt-6 text-slate-300 text-lg">
+                            We treat every home like it's our own. No overtime charges. No hidden fees. 
+                            Just honest, friendly service from licensed professionals.
+                        </p>
+                        
+                        <div class="mt-12 flex items-center gap-x-6">
+                            <div class="text-7xl font-light text-yellow-400">4.98</div>
+                            <div>
+                                <div class="flex text-amber-400 text-2xl">
+                                    ★★★★☆
+                                </div>
+                                <div class="text-xs text-yellow-200">from 1,294 reviews</div>
+                            </div>
+                        </div>
+                        
+                        <div onclick="window.scrollTo({top: document.getElementById('testimonials').offsetTop - 80, behavior: 'smooth'})" 
+                             class="mt-10 flex items-center gap-x-2 text-xs uppercase cursor-pointer hover:text-yellow-400 transition-colors">
+                            <div class="flex-1 h-px bg-white/30"></div>
+                            <span class="font-medium">READ REAL STORIES</span>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-7">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-8">
+                            <i class="fa-solid fa-truck-medical text-4xl text-yellow-400 mb-8"></i>
+                            <div class="font-semibold text-2xl">Rapid Response</div>
+                            <div class="text-slate-300 mt-4">
+                                Our average response time is under 45 minutes for emergency calls within our service area.
+                            </div>
+                            <div class="text-[10px] mt-12 text-yellow-300 flex items-center gap-2">
+                                <div class="h-px flex-1 bg-white/30"></div>
+                                GUARANTEED
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-8">
+                            <i class="fa-solid fa-handshake text-4xl text-yellow-400 mb-8"></i>
+                            <div class="font-semibold text-2xl">Transparent Pricing</div>
+                            <div class="text-slate-300 mt-4">
+                                We give you a firm quote before any work begins. You'll never be surprised by the final bill.
+                            </div>
+                            <div class="mt-12 flex gap-x-4">
+                                <div class="text-xs bg-white/10 px-4 py-3 rounded-2xl">No diagnostic fee if we do the repair</div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-8">
+                            <i class="fa-solid fa-user-tie text-4xl text-yellow-400 mb-8"></i>
+                            <div class="font-semibold text-2xl">Licensed Technicians</div>
+                            <div class="text-slate-300 mt-4">
+                                Every plumber on our team is background-checked, drug-tested, and fully licensed.
+                            </div>
+                            <div class="mt-8 text-xs flex items-center gap-x-5">
+                                <div class="px-5 py-2 bg-white/10 rounded-3xl">EPA 608 Certified</div>
+                                <div class="px-5 py-2 bg-white/10 rounded-3xl">Backflow Certified</div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-8 relative">
+                            <div class="absolute -top-4 -right-4 bg-yellow-400 text-slate-900 text-xs font-bold px-6 py-1 rounded-3xl rotate-12 shadow">OUR PROMISE</div>
+                            <i class="fa-solid fa-screwdriver-wrench text-4xl text-yellow-400 mb-8"></i>
+                            <div class="font-semibold text-2xl">Satisfaction Guaranteed</div>
+                            <div class="text-slate-300 mt-4">
+                                If you're not happy with our work, we'll return and make it right at no additional cost.
+                            </div>
+                            <div class="absolute bottom-8 right-8 text-8xl text-white/10 font-black">100%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RECENT PROJECTS -->
+    <section id="projects" class="py-24 bg-slate-50">
+        <div class="max-w-screen-2xl mx-auto px-8">
+            <div class="flex justify-between items-end mb-12">
+                <div class="max-w-xs">
+                    <span class="text-yellow-500 text-xs font-semibold">RECENT WORK</span>
+                    <h2 class="text-4xl font-semibold tracking-tighter">Beautiful plumbing transformations</h2>
+                </div>
+                <button onclick="showProjectModal()" 
+                        class="text-sm font-medium flex items-center gap-x-2 hover:text-yellow-500 transition-colors">
+                    SEE ALL PROJECTS 
+                    <span class="text-xl">↗</span>
+                </button>
+            </div>
+            
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="group relative overflow-hidden rounded-3xl aspect-video cursor-pointer" onclick="showProjectModal()">
+                    <img src="https://picsum.photos/id/1016/800/600" alt="Modern kitchen sink" 
+                         class="w-full h-full object-cover transition-all group-hover:scale-110 duration-700">
+                    <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 text-white">
+                        <div class="text-xs opacity-70">KITCHEN • 2024</div>
+                        <div class="text-xl font-medium">Custom Island Sink</div>
+                    </div>
+                    <div class="absolute top-6 right-6 bg-white text-slate-900 text-[10px] font-bold py-1 px-3 rounded-3xl">BEFORE &amp; AFTER</div>
+                </div>
+                
+                <div class="group relative overflow-hidden rounded-3xl aspect-video cursor-pointer" onclick="showProjectModal()">
+                    <img src="https://picsum.photos/id/133/800/600" alt="Luxury bathroom" 
+                         class="w-full h-full object-cover transition-all group-hover:scale-110 duration-700">
+                    <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 text-white">
+                        <div class="text-xs opacity-70">BATHROOM • 3 WEEKS AGO</div>
+                        <div class="text-xl font-medium">Spa Shower Remodel</div>
+                    </div>
+                </div>
+                
+                <div class="group relative overflow-hidden rounded-3xl aspect-video cursor-pointer" onclick="showProjectModal()">
+                    <img src="https://picsum.photos/id/180/800/600" alt="Commercial building" 
+                         class="w-full h-full object-cover transition-all group-hover:scale-110 duration-700">
+                    <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 text-white">
+                        <div class="text-xs opacity-70">COMMERCIAL • RESTAURANT</div>
+                        <div class="text-xl font-medium">Grease Trap Install</div>
+                    </div>
+                </div>
+                
+                <div class="group relative overflow-hidden rounded-3xl aspect-video cursor-pointer bg-slate-900 flex items-center justify-center" onclick="showProjectModal()">
+                    <div class="text-center text-white">
+                        <div class="mx-auto w-16 h-16 rounded-2xl bg-yellow-400/10 flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-play text-3xl text-yellow-400"></i>
+                        </div>
+                        <div class="font-medium">Watch our latest install</div>
+                        <div class="text-xs text-slate-400 mt-1">2:14 min video</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" class="py-24 bg-white">
+        <div class="max-w-screen-2xl mx-auto px-8">
+            <div class="grid lg:grid-cols-12 gap-16">
+                <div class="lg:col-span-4">
+                    <div class="max-w-xs">
+                        <div class="uppercase text-xs font-bold text-yellow-500 mb-3">DON'T TAKE OUR WORD</div>
+                        <h2 class="text-5xl font-semibold tracking-tighter leading-none">Real customers. Real results.</h2>
+                        <div class="h-px bg-gradient-to-r from-yellow-300 to-transparent my-10"></div>
+                        <div onclick="prevTestimonial()" class="inline-flex items-center justify-center w-10 h-10 border border-slate-200 hover:border-slate-400 rounded-2xl cursor-pointer transition-colors">
+                            ←
+                        </div>
+                        <div onclick="nextTestimonial()" class="inline-flex items-center justify-center w-10 h-10 border border-slate-200 hover:border-slate-400 rounded-2xl cursor-pointer transition-colors ml-3">
+                            →
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial carousel -->
+                <div class="lg:col-span-8">
+                    <div id="testimonial-slide" class="bg-slate-50 rounded-3xl p-10 transition-all">
+                        <div class="flex gap-x-6">
+                            <div class="w-14 h-14 bg-slate-200 rounded-2xl overflow-hidden flex-shrink-0">
+                                <img src="https://picsum.photos/id/64/200/200" alt="" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex-1">
+                                <div class="italic text-slate-600 text-[21px] leading-tight">"AquaFlow saved our weekend! Our main line backed up on a Saturday night and they were here within the hour. The technician was courteous, clean and explained everything he was doing. Fair price too!"</div>
+                                <div class="flex items-center gap-x-3 mt-12">
+                                    <div>
+                                        <div class="font-semibold">Sarah Patel</div>
+                                        <div class="text-xs text-slate-400">Homeowner • Austin, TX</div>
+                                    </div>
+                                    <div class="flex-1 h-px bg-slate-200"></div>
+                                    <div class="text-amber-400 text-4xl">★★★★</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <div class="bg-gradient-to-r from-yellow-400 to-amber-400 py-8">
+        <div class="max-w-screen-2xl mx-auto px-8 flex flex-col md:flex-row items-center justify-between gap-y-6">
+            <div class="flex items-center gap-x-6">
+                <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-4xl">🔧</div>
+                <div class="text-slate-900">
+                    <span class="font-semibold text-3xl">Need help right now?</span>
+                    <div class="text-sm font-medium opacity-75">Speak to a live plumber in under 60 seconds</div>
+                </div>
+            </div>
+            
+            <button onclick="callNow()" 
+                    class="bg-slate-900 text-white px-16 py-7 rounded-3xl text-xl font-medium flex items-center gap-x-6 group">
+                <span class="group-active:rotate-12 transition-transform">📞</span>
+                <div>
+                    <span class="block text-xs text-yellow-400 tracking-wider">CALL OUR 24/7 HOTLINE</span>
+                    <span class="text-3xl">(555) 429-PLUM</span>
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about" class="py-24">
+        <div class="max-w-screen-2xl mx-auto px-8">
+            <div class="grid md:grid-cols-12 gap-20">
+                <div class="md:col-span-7">
+                    <img src="https://picsum.photos/id/316/1200/800" alt="Plumber at work" 
+                         class="w-full rounded-3xl shadow-2xl">
+                </div>
+                
+                <div class="md:col-span-5 flex flex-col justify-center">
+                    <div class="uppercase text-xs font-semibold mb-2 text-teal-600">EST. 2009</div>
+                    <h2 class="text-5xl font-semibold tracking-tighter">Family owned and operated for 15 years</h2>
+                    <p class="mt-8 text-lg text-slate-600">
+                        Founded by master plumber Mike Rivera, AquaFlow began with one truck and a commitment to do things the right way. 
+                        Today we have a fleet of 14 service vans serving the entire metro area.
+                    </p>
+                    
+                    <div class="mt-auto pt-12 border-t grid grid-cols-3 gap-6 text-center">
+                        <div>
+                            <div class="text-5xl font-light text-slate-300">14</div>
+                            <div class="text-xs mt-2">SERVICE VANS</div>
+                        </div>
+                        <div>
+                            <div class="text-5xl font-light text-slate-300">28</div>
+                            <div class="text-xs mt-2">TEAM MEMBERS</div>
+                        </div>
+                        <div>
+                            <div class="text-5xl font-light text-slate-300">9k</div>
+                            <div class="text-xs mt-2">HOURS TRAINED</div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="showContactModal()" 
+                            class="mt-16 text-sm border border-slate-400 hover:bg-slate-900 hover:text-white transition-all py-6 rounded-3xl font-medium">
+                        MEET THE TEAM
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOG TEASER -->
+    <section id="blog" class="bg-slate-900 text-white py-20">
+        <div class="max-w-screen-2xl mx-auto px-8">
+            <div class="flex flex-col lg:flex-row gap-16">
+                <div class="lg:w-5/12">
+                    <span class="text-amber-400 text-xs font-medium">FROM OUR BLOG</span>
+                    <h2 class="text-white text-4xl font-medium tracking-tighter mt-4">Helpful plumbing tips from the pros</h2>
+                    <p class="text-slate-400 mt-6">
+                        Our licensed plumbers share their knowledge so you can prevent costly repairs and keep your home running smoothly.
+                    </p>
+                    <a href="#" class="mt-8 inline-block text-sm font-semibold border-b border-amber-300 pb-1">VISIT THE BLOG →</a>
+                </div>
+                
+                <div class="flex-1 grid md:grid-cols-2 gap-8">
+                    <div class="bg-white/5 rounded-3xl p-6 cursor-pointer hover:bg-white/10 transition-colors">
+                        <div class="text-xs text-amber-400">JAN 18 • PREVENTION</div>
+                        <div class="mt-4 text-2xl leading-tight font-medium">How to prevent frozen pipes this winter</div>
+                        <div class="mt-6 text-slate-400 text-sm line-clamp-3">
+                            With temperatures dropping across the region, here's a 5-step checklist you can follow to keep your pipes safe.
+                        </div>
+                        <div class="text-xs mt-8 flex justify-between items-center text-slate-400">
+                            <div>5 minute read</div>
+                            <div class="bg-white/10 text-white text-[10px] px-4 py-2 rounded-3xl">READ NOW</div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white/5 rounded-3xl p-6 cursor-pointer hover:bg-white/10 transition-colors">
+                        <div class="text-xs text-amber-400">JAN 11 • DIY</div>
+                        <div class="mt-4 text-2xl leading-tight font-medium">The right way to unclog a toilet without a plunger</div>
+                        <div class="mt-6 text-slate-400 text-sm line-clamp-3">
+                            Sometimes the old plunger just doesn't cut it. Try these proven methods using common household items.
+                        </div>
+                        <div class="text-xs mt-8 flex justify-between items-center text-slate-400">
+                            <div>8 minute read</div>
+                            <div class="bg-white/10 text-white text-[10px] px-4 py-2 rounded-3xl">READ NOW</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA / FOOTER TEASER -->
+    <div id="contact-section" class="bg-white py-20 border-t-8 border-yellow-400">
+        <div class="max-w-screen-2xl mx-auto px-8">
+            <div class="rounded-3xl bg-gradient-to-br from-slate-900 to-slate-800 text-white p-16 grid md:grid-cols-5 gap-12 items-center">
+                <div class="md:col-span-3">
+                    <div class="text-yellow-400 font-medium">READY TO GET STARTED?</div>
+                    <div class="text-5xl font-semibold tracking-tighter leading-none mt-4">Let's fix your plumbing problems today</div>
+                    <div class="mt-6 max-w-xs text-slate-300">
+                        Our friendly dispatch team is standing by to schedule your appointment.
+                    </div>
+                </div>
+                
+                <div class="md:col-span-2">
+                    <div onclick="showContactModal()" 
+                         class="bg-yellow-400 text-slate-900 rounded-3xl py-8 px-10 flex items-center justify-between cursor-pointer group">
+                        <div>
+                            <div class="uppercase text-xs font-bold">Get your free estimate</div>
+                            <div class="text-3xl font-semibold mt-2 group-active:scale-95 transition-transform">BOOK APPOINTMENT</div>
+                        </div>
+                        <i class="fa-solid fa-arrow-right text-5xl transition-transform group-hover:rotate-45"></i>
+                    </div>
+                    
+                    <div class="text-xs text-center text-slate-400 mt-8">OR CALL <span onclick="callNow()" class="text-white font-medium cursor-pointer">(555) 429-7586</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 text-slate-400">
+        <div class="max-w-screen-2xl mx-auto px-8 pt-20">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-y-12">
+                <!-- Col 1 -->
+                <div>
+                    <div class="flex items-center gap-x-3 text-white">
+                        <div class="w-8 h-8 bg-yellow-400 rounded-2xl flex items-center justify-center">
+                            <i class="fa-solid fa-wrench text-slate-900"></i>
+                        </div>
+                        <span class="logo-font text-3xl font-semibold tracking-tighter">AQUAFLOW</span>
+                    </div>
+                    <div class="text-xs mt-6 leading-relaxed">
+                        Professional plumbing services since 2009.<br>
+                        Licensed • Bonded • Insured
+                    </div>
+                    <div class="mt-8 flex gap-x-4">
+                        <i onclick="fakeSocialClick()" class="fa-brands fa-facebook-f cursor-pointer hover:text-white"></i>
+                        <i onclick="fakeSocialClick()" class="fa-brands fa-instagram cursor-pointer hover:text-white"></i>
+                        <i onclick="fakeSocialClick()" class="fa-brands fa-youtube cursor-pointer hover:text-white"></i>
+                    </div>
+                </div>
+                
+                <!-- Col 2 -->
+                <div>
+                    <div class="text-white text-sm font-medium mb-6">SERVICES</div>
+                    <div class="space-y-4 text-sm">
+                        <div class="cursor-pointer hover:text-white transition-colors">Emergency Plumbing</div>
+                        <div class="cursor-pointer hover:text-white transition-colors">Drain &amp; Sewer Cleaning</div>
+                        <div class="cursor-pointer hover:text-white transition-colors">Water Heater Repair</div>
+                        <div class="cursor-pointer hover:text-white transition-colors">Bathroom &amp; Kitchen Remodels</div>
+                        <div class="cursor-pointer hover:text-white transition-colors">Leak Detection &amp; Repair</div>
+                    </div>
+                </div>
+                
+                <!-- Col 3 -->
+                <div>
+                    <div class="text-white text-sm font-medium mb-6">COMPANY</div>
+                    <div class="space-y-4 text-sm">
+                        <div class="cursor-pointer hover:text-white transition-colors">About Us</div>
+                        <div class="cursor-pointer hover:text-white transition-colors">Our Team</div>
+                        <div class="cursor-pointer hover:text-white transition-colors">Careers</div>
+                        <div class="cursor-pointer hover:text-white transition-colors">Service Areas</div>
+                        <div class="cursor-pointer hover:text-white transition-colors">Contact</div>
+                    </div>
+                </div>
+                
+                <!-- Col 4 -->
+                <div>
+                    <div class="text-white text-sm font-medium mb-6">RESOURCES</div>
+                    <div class="space-y-4 text-sm">
+                        <div class="cursor-pointer hover:text-white transition-colors">Plumbing Tips</div>
+                        <div class="cursor-pointer hover:text-white transition-colors">Cost Guides</div>
+                        <div class="cursor-pointer hover:text-white transition-colors">Maintenance Checklist</div>
+                        <div class="cursor-pointer hover:text-white transition-colors">Warranty Info</div>
+                    </div>
+                </div>
+                
+                <!-- Col 5 -->
+                <div class="col-span-2 md:col-span-1">
+                    <div class="bg-slate-900 rounded-3xl p-7 text-xs">
+                        <div class="font-medium text-white">HEADQUARTERS</div>
+                        <div class="mt-8">
+                            1428 Riverbend Drive<br>
+                            Suite 210<br>
+                            Austin, TX 78704
+                        </div>
+                        <div class="mt-6">
+                            <a href="tel:5554297586" class="block text-yellow-400 hover:text-amber-400">(555) 429-7586</a>
+                        </div>
+                        <div class="text-[10px] mt-12 text-slate-500">
+                            MON–SUN 24 HOURS
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bottom bar -->
+            <div class="pt-16 mt-20 border-t border-slate-800 text-[10px] flex flex-col md:flex-row justify-between items-center gap-y-6">
+                <div>© 2025 AquaFlow Plumbing LLC. All rights reserved.</div>
+                <div class="flex items-center gap-x-6 text-[10px]">
+                    <div class="cursor-pointer hover:text-slate-200">Privacy</div>
+                    <div class="cursor-pointer hover:text-slate-200">Terms</div>
+                    <div onclick="window.scrollTo(0,0)" class="flex items-center gap-x-2 cursor-pointer">
+                        <span>BACK TO TOP</span> 
+                        <i class="fa-solid fa-arrow-turn-up"></i>
+                    </div>
+                </div>
+                <div class="flex items-center gap-x-5 text-xs">
+                    <div class="px-3 py-1 bg-slate-900 rounded">BBB A+</div>
+                    <div class="px-3 py-1 bg-slate-900 rounded">Angi Super Service</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CONTACT MODAL -->
+    <div onclick="if(event.target.id === 'contact-modal') hideContactModal()" id="contact-modal" 
+         class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[9999]">
+        <div onclick="event.stopImmediatePropagation()" 
+             class="bg-white max-w-lg w-full mx-4 rounded-3xl shadow-2xl overflow-hidden">
+            
+            <!-- Modal header -->
+            <div class="px-8 pt-8 pb-4 border-b flex items-center justify-between">
+                <div class="font-semibold text-2xl">Get a free quote in 60 seconds</div>
+                <button onclick="hideContactModal()" class="w-9 h-9 flex items-center justify-center text-3xl leading-none text-slate-300 hover:text-slate-500">×</button>
+            </div>
+            
+            <div class="p-8">
+                <form id="quote-form" onsubmit="handleSubmit(event)">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-500 mb-2">FIRST NAME</label>
+                            <input id="fname" type="text" value="Alex" 
+                                   class="w-full border border-slate-200 focus:border-yellow-400 rounded-2xl px-5 py-5 outline-none text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-500 mb-2">LAST NAME</label>
+                            <input id="lname" type="text" value="Rivera" 
+                                   class="w-full border border-slate-200 focus:border-yellow-400 rounded-2xl px-5 py-5 outline-none text-sm">
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <label class="block text-xs font-medium text-slate-500 mb-2">PHONE NUMBER</label>
+                        <input id="phone" type="tel" value="(512) 555-9821" 
+                               class="w-full border border-slate-200 focus:border-yellow-400 rounded-2xl px-5 py-5 outline-none text-sm">
+                    </div>
+                    
+                    <div class="mt-6">
+                        <label class="block text-xs font-medium text-slate-500 mb-2">WHAT'S THE PROBLEM?</label>
+                        <select id="issue" 
+                                class="w-full border border-slate-200 focus:border-yellow-400 rounded-2xl px-5 py-5 outline-none text-sm">
+                            <option value="">Select an issue...</option>
+                            <option value="leaking" selected>Leaking pipe or faucet</option>
+                            <option value="drain">Clogged drain or toilet</option>
+                            <option value="heater">Water heater not working</option>
+                            <option value="install">New fixture installation</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <label class="block text-xs font-medium text-slate-500 mb-2">ADDRESS (OPTIONAL)</label>
+                        <input id="address" type="text" value="142 Maple Grove Lane" 
+                               class="w-full border border-slate-200 focus:border-yellow-400 rounded-2xl px-5 py-5 outline-none text-sm">
+                    </div>
+                    
+                    <button type="submit"
+                            class="mt-10 w-full py-7 bg-yellow-400 text-slate-950 font-semibold text-xl rounded-3xl active:scale-[0.97] transition-transform">
+                        SEND MY REQUEST →
+                    </button>
+                    
+                    <div class="text-center text-[10px] text-slate-400 mt-8">
+                        A plumber will call you within minutes • No obligation
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUCCESS MODAL -->
+    <div onclick="if(event.target.id === 'success-modal') hideSuccessModal()" id="success-modal" 
+         class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[99999]">
+        <div onclick="event.stopImmediatePropagation()" 
+             class="max-w-xs w-full bg-white rounded-3xl text-center p-8">
+            <div class="mx-auto w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mb-6">
+                <i class="fa-solid fa-check text-5xl text-emerald-500"></i>
+            </div>
+            <div class="font-semibold text-3xl text-slate-800">Request received!</div>
+            <div class="text-slate-500 mt-4">Our nearest technician is being dispatched to your location.</div>
+            
+            <div class="mt-8 text-xs bg-slate-100 rounded-2xl p-4 text-left">
+                <div class="flex justify-between text-slate-400 text-[10px]">
+                    <div>ESTIMATED ARRIVAL</div>
+                    <div class="font-medium text-emerald-500">28 MINUTES</div>
+                </div>
+                <div id="success-name" class="font-medium text-lg mt-4"></div>
+                <div class="text-xs text-slate-400">We'll call you shortly at the number provided.</div>
+            </div>
+            
+            <button onclick="hideSuccessModal()" 
+                    class="mt-10 text-xs border border-slate-300 px-10 py-6 rounded-3xl">CLOSE WINDOW</button>
+        </div>
+    </div>
+
+    <script>
+        // Tailwind script run
+        function initializeTailwind() {
+            tailwind.config = {
+                content: [],
+                theme: {
+                    extend: {}
+                }
+            }
+        }
+        
+        // Animate the stat counters
+        function animateCounters() {
+            const counters = [
+                { id: 'stat-1', target: 1842, duration: 1700 },
+                { id: 'stat-2', target: 98, duration: 1200 },
+                { id: 'stat-3', target: 15, duration: 900 },
+                { id: 'stat-4', target: 42, duration: 1400 }
+            ]
+            
+            counters.forEach(counter => {
+                const el = document.getElementById(counter.id)
+                if (!el) return
+                
+                let start = 0
+                const increment = Math.ceil(counter.target / (counter.duration / 16))
+                
+                const timer = setInterval(() => {
+                    start += increment
+                    if (start >= counter.target) {
+                        if (counter.id === 'stat-2') {
+                            el.textContent = '98%'
+                        } else {
+                            el.textContent = counter.target
+                        }
+                        clearInterval(timer)
+                    } else {
+                        if (counter.id === 'stat-2') {
+                            el.textContent = start + '%'
+                        } else {
+                            el.textContent = start
+                        }
+                    }
+                }, 16)
+            })
+        }
+        
+        // Fake arrival countdown
+        function startArrivalTimer() {
+            let minutes = 41
+            const el = document.getElementById('arrival-time')
+            
+            setInterval(() => {
+                minutes--
+                if (minutes < 12) minutes = 41
+                el.textContent = minutes
+            }, 4700)
+        }
+        
+        let currentTestimonial = 0
+        const testimonials = [
+            {
+                quote: "AquaFlow saved our weekend! Our main line backed up on a Saturday night and they were here within the hour. The technician was courteous, clean and explained everything he was doing. Fair price too!",
+                name: "Sarah Patel",
+                location: "Homeowner • Austin, TX",
+                avatar: "https://picsum.photos/id/64/200/200"
+            },
+            {
+                quote: "I had them install a tankless water heater. The difference is night and day. No more running out of hot water when the kids are taking showers. The team was professional and cleaned up perfectly.",
+                name: "Marcus Thompson",
+                location: "Homeowner • Round Rock, TX",
+                avatar: "https://picsum.photos/id/201/200/200"
+            },
+            {
+                quote: "They replaced all the old galvanized pipes in our 1950s home with PEX. I can't believe how much better the water pressure is now. Highly recommend them for any big plumbing job.",
+                name: "Linda Chen",
+                location: "Homeowner • Cedar Park, TX",
+                avatar: "https://picsum.photos/id/29/200/200"
+            }
+        ]
+        
+        function renderTestimonial() {
+            const container = document.getElementById('testimonial-slide')
+            if (!container) return
+            
+            const t = testimonials[currentTestimonial]
+            
+            container.innerHTML = `
+                <div class="flex gap-x-6">
+                    <div class="w-14 h-14 bg-slate-200 rounded-2xl overflow-hidden flex-shrink-0">
+                        <img src="${t.avatar}" alt="" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1">
+                        <div class="italic text-slate-600 text-[21px] leading-tight">"${t.quote}"</div>
+                        <div class="flex items-center gap-x-3 mt-12">
+                            <div>
+                                <div class="font-semibold">${t.name}</div>
+                                <div class="text-xs text-slate-400">${t.location}</div>
+                            </div>
+                            <div class="flex-1 h-px bg-slate-200"></div>
+                            <div class="text-amber-400 text-4xl">★★★★★</div>
+                        </div>
+                    </div>
+                </div>
+            `
+        }
+        
+        function nextTestimonial() {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length
+            const slide = document.getElementById('testimonial-slide')
+            slide.style.opacity = 0
+            
+            setTimeout(() => {
+                renderTestimonial()
+                slide.style.transitionDuration = '400ms'
+                slide.style.opacity = 1
+            }, 280)
+        }
+        
+        function prevTestimonial() {
+            currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length
+            const slide = document.getElementById('testimonial-slide')
+            slide.style.opacity = 0
+            
+            setTimeout(() => {
+                renderTestimonial()
+                slide.style.transitionDuration = '400ms'
+                slide.style.opacity = 1
+            }, 280)
+        }
+        
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu')
+            menu.classList.toggle('hidden')
+        }
+        
+        function showContactModal() {
+            const modal = document.getElementById('contact-modal')
+            modal.classList.remove('hidden')
+            modal.classList.add('flex')
+            
+            // Auto focus first input
+            setTimeout(() => {
+                const fname = document.getElementById('fname')
+                if (fname) fname.focus()
+            }, 600)
+        }
+        
+        function hideContactModal() {
+            const modal = document.getElementById('contact-modal')
+            modal.classList.add('hidden')
+            modal.classList.remove('flex')
+        }
+        
+        function hideSuccessModal() {
+            const modal = document.getElementById('success-modal')
+            modal.classList.add('hidden')
+            modal.classList.remove('flex')
+        }
+        
+        function handleSubmit(e) {
+            e.preventDefault()
+            
+            const fname = document.getElementById('fname').value || 'Alex'
+            
+            hideContactModal()
+            
+            // Show success modal
+            setTimeout(() => {
+                const successModal = document.getElementById('success-modal')
+                const nameEl = document.getElementById('success-name')
+                nameEl.textContent = fname + ", thank you!"
+                successModal.classList.remove('hidden')
+                successModal.classList.add('flex')
+            }, 420)
+            
+            // Reset form
+            document.getElementById('quote-form').reset()
+        }
+        
+        function fakeBookNow() {
+            const modal = document.getElementById('contact-modal')
+            modal.classList.remove('hidden')
+            modal.classList.add('flex')
+        }
+        
+        function selectService(n) {
+            // Could expand card or open modal with more info
+            showContactModal()
+        }
+        
+        function bookService(n) {
+            event.stopImmediatePropagation()
+            showContactModal()
+        }
+        
+        function showAllServicesModal() {
+            const services = [
+                "Emergency Plumbing", "Drain Cleaning", "Water Heater Services", 
+                "Pipe Repair", "Bathroom Remodeling", "Kitchen Plumbing", "Sewer Line Repair",
+                "Toilet Repair & Installation", "Garbage Disposal", "Sump Pump", "Backflow Prevention"
+            ]
+            
+            let html = `<div class="fixed inset-0 bg-black/70 z-[9999] flex items-center justify-center" onclick="this.remove()">`
+            html += `<div onclick="event.stopImmediatePropagation()" class="bg-white w-full max-w-2xl mx-4 rounded-3xl p-8 max-h-[90vh] overflow-auto">`
+            html += `<div class="flex justify-between mb-8"><div class="font-semibold text-3xl">All Services</div><div onclick="this.closest('.fixed').remove()" class="cursor-pointer text-4xl text-slate-200">×</div></div>`
+            html += `<div class="grid grid-cols-2 gap-4">`
+            
+            services.forEach(service => {
+                html += `
+                    <div onclick="this.closest('.fixed').remove();showContactModal()" 
+                         class="border border-transparent hover:border-yellow-400 hover:shadow p-6 rounded-3xl cursor-pointer transition-all">
+                        <i class="fa-solid fa-check text-emerald-400"></i>
+                        <div class="font-medium mt-4">${service}</div>
+                    </div>`
+            })
+            
+            html += `</div></div></div>`
+            
+            const div = document.createElement('div')
+            div.innerHTML = html
+            document.body.appendChild(div.children[0])
+        }
+        
+        function showProjectModal() {
+            const modalHTML = `
+            <div onclick="this.remove()" class="fixed inset-0 bg-black/80 z-[9999] flex items-center justify-center p-4">
+                <div onclick="event.stopImmediatePropagation()" class="bg-white max-w-2xl w-full rounded-3xl overflow-hidden">
+                    <div class="relative">
+                        <img src="https://picsum.photos/id/1016/1200/700" class="w-full h-80 object-cover" alt="">
+                        <div class="absolute top-6 left-6 bg-white text-xs font-bold px-5 py-3 rounded-3xl shadow">KITCHEN RENOVATION • BEFORE &amp; AFTER</div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="font-semibold text-3xl">From outdated to modern</h3>
+                        <div class="flex gap-8 mt-6">
+                            <div class="flex-1">
+                                <div class="text-xs text-slate-400">PROBLEM</div>
+                                <ul class="mt-3 text-sm space-y-4">
+                                    <li class="flex gap-x-3"><span class="text-red-400">●</span> Constant leaks under sink</li>
+                                    <li class="flex gap-x-3"><span class="text-red-400">●</span> Low water pressure</li>
+                                    <li class="flex gap-x-3"><span class="text-red-400">●</span> Outdated fixtures</li>
+                                </ul>
+                            </div>
+                            <div class="flex-1">
+                                <div class="text-xs text-slate-400">SOLUTION</div>
+                                <ul class="mt-3 text-sm space-y-4">
+                                    <li class="flex gap-x-3"><span class="text-emerald-400">●</span> New PEX piping</li>
+                                    <li class="flex gap-x-3"><span class="text-emerald-400">●</span> Touchless faucet install</li>
+                                    <li class="flex gap-x-3"><span class="text-emerald-400">●</span> Under-sink filtration</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-12 pt-8 border-t text-xs flex justify-between items-center">
+                            <div>
+                                <span class="font-medium text-slate-900">Completed in 2 days</span><br>
+                                <span class="text-slate-400">$1,290 total</span>
+                            </div>
+                            <button onclick="this.closest('.fixed').remove();showContactModal()" 
+                                    class="px-7 py-4 text-sm font-medium bg-slate-900 text-white rounded-3xl">I WANT THIS LOOK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>`
+            
+            const tempDiv = document.createElement('div')
+            tempDiv.innerHTML = modalHTML
+            document.body.append(tempDiv.children[0])
+        }
+        
+        function callNow() {
+            const messages = [
+                "Calling dispatch team...",
+                "Technician Mike is 11 minutes away...",
+                "Connecting you now..."
+            ]
+            let i = 0
+            const toast = document.createElement('div')
+            toast.style.cssText = 'position:fixed;bottom:30px;left:30px;background:#111827;color:white;padding:16px 24px;border-radius:9999px;box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3);display:flex;align-items:center;gap:12px;z-index:99999;font-size:15px;'
+            toast.innerHTML = `<i class="fa-solid fa-phone text-red-400"></i><span id="toast-text">${messages[0]}</span>`
+            document.body.appendChild(toast)
+            
+            const interval = setInterval(() => {
+                i++
+                if (i >= messages.length) {
+                    clearInterval(interval)
+                    setTimeout(() => {
+                        toast.style.transitionDuration = '600ms'
+                        toast.style.opacity = 0
+                        setTimeout(() => toast.remove(), 700)
+                    }, 2100)
+                    return
+                }
+                document.getElementById('toast-text').textContent = messages[i]
+            }, 1400)
+        }
+        
+        function fakeSocialClick() {
+            const toast = document.createElement("div")
+            toast.textContent = "🔗 Redirecting to social profile..."
+            toast.style.cssText = "position:fixed; bottom:40px; right:40px; background:rgb(234 179 8); color:#111827; padding:14px 22px; border-radius:9999px; font-size:13px; box-shadow: 25px 25px 30px -15px rgb(234 179 8); z-index:999999;"
+            document.body.appendChild(toast)
+            
+            setTimeout(() => {
+                toast.style.transition = 'all 0.4s cubic-bezier(0.4,0,1,1)'
+                toast.style.transform = 'translateY(40px)'
+                toast.style.opacity = '0'
+                setTimeout(() => toast.remove(), 400)
+            }, 2100)
+        }
+        
+        function smoothScrollTo(section) {
+            let el
+            if (section === 'services') el = document.getElementById('services')
+            else if (section === 'about') el = document.getElementById('about')
+            else if (section === 'projects') el = document.getElementById('projects')
+            else if (section === 'testimonials') el = document.getElementById('testimonials')
+            else if (section === 'blog') el = document.getElementById('blog')
+            else if (section === 'contact-section') el = document.getElementById('contact-section')
+            
+            if (el) {
+                const navHeight = 80
+                const topPos = el.getBoundingClientRect().top + window.scrollY - navHeight
+                window.scrollTo({ top: topPos, behavior: 'smooth' })
+            }
+            
+            // Close mobile menu if open
+            const mobileMenu = document.getElementById('mobile-menu')
+            if (!mobileMenu.classList.contains('hidden')) mobileMenu.classList.add('hidden')
+        }
+        
+        // Keyboard shortcuts
+        function handleKeyboard(e) {
+            if (e.metaKey && e.key === "k") {
+                e.preventDefault()
+                showContactModal()
+            }
+        }
+        
+        // Main initialization
+        function initialize() {
+            initializeTailwind()
+            
+            // Run counter animations when scrolled into view
+            let countersAnimated = false
+            
+            function handleScroll() {
+                if (!countersAnimated && window.scrollY > 300) {
+                    animateCounters()
+                    countersAnimated = true
+                    window.removeEventListener('scroll', handleScroll)
+                }
+            }
+            
+            window.addEventListener('scroll', handleScroll)
+            
+            // Initial render
+            renderTestimonial()
+            startArrivalTimer()
+            
+            // Keyboard listener
+            document.addEventListener('keydown', handleKeyboard)
+            
+            // Make the hero droplet icon spin occasionally
+            setInterval(() => {
+                const icons = document.querySelectorAll('.fa-droplet')
+                if (icons.length > 0) {
+                    icons.forEach(icon => {
+                        icon.style.transitionDuration = '900ms'
+                        icon.style.transform = 'rotate(80deg)'
+                        setTimeout(() => {
+                            icon.style.transform = 'rotate(0deg)'
+                        }, 900)
+                    })
+                }
+            }, 8000)
+            
+            // Demo: randomly change the arrival time every 8 seconds
+            setInterval(() => {
+                const arrivalEl = document.getElementById('arrival-time')
+                if (arrivalEl) {
+                    const current = parseInt(arrivalEl.textContent)
+                    if (current > 15) {
+                        arrivalEl.style.transitionDuration = '300ms'
+                        arrivalEl.style.transform = 'scale(1.6)'
+                        
+                        setTimeout(() => {
+                            arrivalEl.textContent = Math.floor(Math.random() * 18) + 14
+                            arrivalEl.style.transform = 'scale(1)'
+                        }, 200)
+                    }
+                }
+            }, 8000)
+            
+            // Production ready message in console
+            console.log('%c✅ AquaFlow Plumbing website ready. Fully interactive and responsive.', 'font-family:monospace;color:#eab308;font-size:10px')
+            
+            // Preload a couple images
+            const images = [
+                'https://picsum.photos/id/1015/2000/1200',
+                'https://picsum.photos/id/201/600/400'
+            ]
+            images.forEach(src => {
+                const img = new Image()
+                img.src = src
+            })
+        }
+        
+        // Boot app
+        window.onload = initialize
+    </script>
+</body>
+</html>
